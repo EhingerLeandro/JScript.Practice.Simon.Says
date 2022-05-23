@@ -25,7 +25,7 @@ strictButton.addEventListener("click", (event)=>{
 	}else{
 		strict=false;
 	}
-})
+});
 
 onButton.addEventListener("click", (event)=>{
 	if(onButton.checked===true){
@@ -35,4 +35,27 @@ onButton.addEventListener("click", (event)=>{
 		turnCounter.innerHTML="";
 		on=false;
 	}
-})
+});
+
+startButton.addEventListener("click", (event)=>{
+	if(on||win){
+		play();
+	}
+});
+
+function play(){
+	win=false;
+	order=[];
+	playerOder=[];
+	flash=0;
+	intervalID=0;
+	turn=1;
+	turnCounter.innerHTML= 1;
+	good=true;
+	for(i=0; i<20; i++){
+		order.push(Math.floor(Math.random()*4)+1)
+	} 
+	compTurn=true;
+	intervalID=setInterval(gameTurn, 800);
+
+}
