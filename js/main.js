@@ -13,7 +13,7 @@ let win;
 const turnCounter= document.querySelector("#turn");
 const topLeft= document.querySelector("#topleft");
 const topRight= document.querySelector("#topright");
-const bottomLeft= document.querySelector("#bottomLeft");
+const bottomLeft= document.querySelector("#bottomleft");
 const bottomRight= document.querySelector("#bottomright");
 const strictButton= document.querySelector("#strict");
 const onButton= document.querySelector("#on");
@@ -34,6 +34,8 @@ onButton.addEventListener("click", (event)=>{
 	}else{
 		turnCounter.innerHTML="";
 		on=false;
+		clearColor();
+		clearInterval(intervalID);
 	}
 });
 
@@ -57,5 +59,123 @@ function play(){
 	} 
 	compTurn=true;
 	intervalID=setInterval(gameTurn, 800);
-
 }
+
+function gameTurn(){
+	on= false;
+	if(flash==turn){
+		clearInterval(intervalID);
+		compTurn=false;
+		clearColor();
+		on=true;
+	}
+
+	if(compTurn){
+		clearColor();
+		setTimeout( ()=>{
+			if(order[flash]==1) one();
+			if(order[flash]==2) two();
+			if(order[flash]==3) three();
+			if(order[flash]==4) four(); 
+			flash++;
+		}, 200);
+	}
+}
+
+function one(){
+	if(noise){
+		let audio=document.getElementById("clip1");
+		audio.play();
+	}
+	noise=true;
+	topLeft.style.backgroundColor ="lightgreen";
+}
+
+function two(){
+	if(noise){
+		let audio=document.getElementById("clip1");
+		audio.play();
+	}
+	noise=true;
+	topRight.style.backgroundColor ="tomato";
+}
+
+function three(){
+	if(noise){
+		let audio=document.getElementById("clip1");
+		audio.play();
+	}
+	noise=true;
+	bottomLeft.style.backgroundColor ="yellow";
+}
+
+function four(){
+	if(noise){
+		let audio=document.getElementById("clip1");
+		audio.play();
+	}
+	noise=true;
+	bottomRight.style.backgroundColor ="lightskyblue";
+}
+
+function clearColor(){
+	topLeft.style.backgroundColor="darkgreen";
+	topRight.style.backgroundColor="darkred";
+	bottomLeft.style.backgroundColor="goldenrod";
+	bottomRight.style.backgroundColor="darkblue";
+}
+
+
+
+
+topLeft.addEventListener("click", (event)=>{
+	if (on){
+		playerOrder.push(1);
+		check();
+		one();
+		if(!win){
+			setTimeout(()=>{
+				clearColor;
+			}, 300);
+		}
+	}
+})
+
+topRight.addEventListener("click", (event)=>{
+	if (on){
+		playerOrder.push(1);
+		check();
+		one();
+		if(!win){
+			setTimeout(()=>{
+				clearColor;
+			}, 300);
+		}
+	}
+})
+
+bottomLeft.addEventListener("click", (event)=>{
+	if (on){
+		playerOrder.push(1);
+		check();
+		one();
+		if(!win){
+			setTimeout(()=>{
+				clearColor;
+			}, 300);
+		}
+	}
+})
+
+bottomRight.addEventListener("click", (event)=>{
+	if (on){
+		playerOrder.push(1);
+		check();
+		one();
+		if(!win){
+			setTimeout(()=>{
+				clearColor;
+			}, 300);
+		}
+	}
+})
