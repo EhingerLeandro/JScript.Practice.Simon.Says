@@ -1,12 +1,12 @@
 let order=[];
-let playOrder= [];
-let flash;//booleano
-let turn;//booleano
+let playerOrder= [];
+let flash;
+let turn;
 let good;//booleano
 let compTurn;//booleano
 let intervalId;//booleano
 let strict=false;
-let noise=false;
+let noise=true;
 let on=false;
 let win;
 
@@ -19,7 +19,7 @@ const strictButton= document.querySelector("#strict");
 const onButton= document.querySelector("#on");
 const startButton= document.querySelector("#start");
 
-strictButton.addEventListener("click", (event)=>{
+strictButton.addEventListener("click", (event)=>{ 
 	if(strictButton.checked===true){
 		strict=true;
 	}else{
@@ -29,13 +29,13 @@ strictButton.addEventListener("click", (event)=>{
 
 onButton.addEventListener("click", (event)=>{
 	if(onButton.checked===true){
-		turnCounter.innerHTML="-";
+		turnCounter.innerHTML="-"; 
 		on=true;
 	}else{
 		turnCounter.innerHTML="";
 		on=false;
 		clearColor();
-		clearInterval(intervalID);
+		clearInterval(intervalId);
 	}
 });
 
@@ -50,7 +50,7 @@ function play(){
 	order=[];
 	playerOder=[];
 	flash=0;
-	intervalID=0;
+	intervalId=0;
 	turn=1;
 	turnCounter.innerHTML= 1;
 	good=true;
@@ -58,16 +58,16 @@ function play(){
 		order.push(Math.floor(Math.random()*4)+1)
 	} 
 	compTurn=true;
-	intervalID=setInterval(gameTurn, 800);
+	intervalId = setInterval(gameTurn, 800); 
 }
 
 function gameTurn(){
 	on= false;
 	if(flash==turn){
-		clearInterval(intervalID);
+		clearInterval(intervalId);
 		compTurn=false;
 		clearColor();
-		on=true;
+		on=true; 
 	}
 
 	if(compTurn){
@@ -132,9 +132,6 @@ function flashColor(){
 	bottomRight.style.backgroundColor="lightskyblue";
 }
 
-
-
-
 topLeft.addEventListener("click", (event)=>{
 	if (on){
 		playerOrder.push(1);
@@ -152,7 +149,7 @@ topRight.addEventListener("click", (event)=>{
 	if (on){
 		playerOrder.push(2);
 		check();
-		one();
+		two();
 		if(!win){
 			setTimeout(()=>{
 				clearColor();
@@ -165,7 +162,7 @@ bottomLeft.addEventListener("click", (event)=>{
 	if (on){
 		playerOrder.push(3);
 		check();
-		one();
+		three();
 		if(!win){
 			setTimeout(()=>{
 				clearColor();
@@ -178,7 +175,7 @@ bottomRight.addEventListener("click", (event)=>{
 	if (on){
 		playerOrder.push(4);
 		check();
-		one();
+		four();
 		if(!win){
 			setTimeout(()=>{
 				clearColor();
@@ -188,8 +185,8 @@ bottomRight.addEventListener("click", (event)=>{
 })
 
 function check(){
-	if (playerOrder[playerOrder.length -1] !== order[playerOrder.length - 1])
-		good= false;
+	if (playerOrder[playerOrder.length -1] !== order[playerOrder.length - 1]){
+		good= false;}
 	if (playerOrder.length == 20 && good){
 		winGame();
 	}
@@ -212,16 +209,16 @@ function check(){
 		}, 800);
 	noise=false;
 	}
-}
 
-if(turn== playerOrder.length && good && !win){
-	turn++;
-	playerOrder=[];
-	compTurn = true;
-	flash = 0;
-	turnCounter.innerHTML = turn;
-	intervalId=setInterval(gameTurn, 800)
-
+	if(turn== playerOrder.length && good && !win){
+		turn++;
+		playerOrder=[];
+		compTurn = true;
+		flash = 0;
+		turnCounter.innerHTML = turn;
+		intervalId=setInterval(gameTurn, 800)
+	
+	}
 }
 
 function winGame(){
